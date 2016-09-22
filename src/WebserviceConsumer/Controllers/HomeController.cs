@@ -27,6 +27,13 @@ namespace WebserviceConsumer.Controllers
             return View();
         }
 
+        public IActionResult Calculator()
+        {
+            ViewData["Message"] = "Your Calculator page.";
+
+            return View();
+        }
+
         public IActionResult Error()
         {
             return View();

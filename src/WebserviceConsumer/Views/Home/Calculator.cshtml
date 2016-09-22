@@ -1,0 +1,65 @@
+﻿@{
+    ViewData["Title"] = "Calculator";
+}
+<h2>@ViewData["Title"].</h2>
+<h3>@ViewData["Message"]</h3>
+
+<p>Enter Integer Values Here:</p>
+
+<div class="container">
+    <form>
+        <div class="form-group">
+            <input type="text" class="form-control" id="param1" placeholder="0" value="0">
+            <input type="text" class="form-control" id="param2" placeholder="0" value="0">
+        </div>
+        <button type="button" class="btn btn-primary" id="btnAdd" onclick="Add()">Add</button>
+        <button type="button" class="btn btn-primary" id="btnSubtract" onclick="Subtract()">Subtract</button>
+    </form>
+</div>
+
+<script>
+
+    Add = function(){
+        var param1 = encodeURIComponent(document.getElementById('param1').value);
+        var param2 = encodeURIComponent(document.getElementById('param2').value);
+
+        var url = "http://128.199.219.151:5000/api/add?param1=" + param1 + "&param2=" + param2;
+
+	    $.ajax({
+	      type: "GET",
+	      url: url,
+	      success: function (ret) {
+	          alert(ret);
+   	      },
+		    error: function(jqXHR, textStatus, errorThrown) {
+		      console.log(textStatus, errorThrown);
+		      alert(textStatus);
+		      alert(errorThrown);
+		    },
+		    complete: function() {
+		    }
+	    });
+    };
+
+    Subtract = function () {
+        var param1 = encodeURIComponent(document.getElementById('param1').value);
+        var param2 = encodeURIComponent(document.getElementById('param2').value);
+
+        var url = "http://128.199.219.151:5001/api/subtract?param1=" + param1 + "&param2=" + param2;
+
+        $.ajax({
+            type: "GET",
+            url: url,
+            success: function (ret) {
+                alert(ret);
+            },
+            error: function (jqXHR, textStatus, errorThrown) {
+                console.log(textStatus, errorThrown);
+                alert(textStatus);
+                alert(errorThrown);
+            },
+            complete: function () {
+            }
+        });
+    };
+</script>
