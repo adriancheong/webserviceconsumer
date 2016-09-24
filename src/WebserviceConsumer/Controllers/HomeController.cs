@@ -34,6 +34,13 @@ namespace WebserviceConsumer.Controllers
             return View();
         }
 
+        public IActionResult Docker()
+        {
+            ViewData["Message"] = "Your Docker page.";
+
+            return View();
+        }
+
         public IActionResult Error()
         {
             return View();
