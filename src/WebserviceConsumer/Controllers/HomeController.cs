@@ -36,7 +36,7 @@ namespace WebserviceConsumer.Controllers
 
         public IActionResult Docker()
         {
-            ViewData["Message"] = "Your Docker 2.0 page.";
+            ViewData["Message"] = "Your Docker 3.0 page.";
 
             return View();
         }
