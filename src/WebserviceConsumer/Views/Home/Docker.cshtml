@@ -1,4 +1,6 @@
-﻿@{
+﻿<link rel="stylesheet" href="~/css/docker.css" />
+
+@{
     ViewData["Title"] = "Docker";
 }
 <h2>@ViewData["Title"]</h2>
@@ -7,6 +9,275 @@
 <div class="container">
     <img src="~/images/Docker Workflow.png" />
 </div>
+
+<br /><br /><hr /><br /><br />
+
+<div class=WordSection1>
+
+    <p class=MsoTitle><span lang=EN-SG>Docker Setup</span></p>
+
+    <p class=MsoNormal>
+        <span lang=EN-SG>
+            There are multiple ways to setup Docker.
+            Use the one that you prefer.
+        </span>
+    </p>
+
+    <p class=MsoListParagraphCxSpFirst style='text-indent:-18.0pt'>
+        <span lang=EN-SG>
+            1)<span style='font:7.0pt "Times New Roman"'>
+                &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+            </span>
+        </span><span lang=EN-SG>
+            Use a Cloud Provider to automatically provision
+            a system with Docker Installed.
+        </span>
+    </p>
+
+    <p class=MsoListParagraphCxSpLast style='text-indent:-18.0pt'>
+        <span lang=EN-SG>
+            2)<span style='font:7.0pt "Times New Roman"'>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</span>
+        </span><span lang=EN-SG>Manually install Docker on a server you already have.</span>
+    </p>
+
+    <p class=MsoNormal><span lang=EN-SG>&nbsp;</span></p>
+
+    <h1><span lang=EN-SG>Using a Cloud Provider</span></h1>
+
+    <p class=MsoNormal>
+        <span lang=EN-SG>
+            Cloud Providers like Digital Ocean, AWS,
+            and Azure can automatically specify Docker to be installed when you are
+            provisioning a server. Just select the appropriate image during provisioning.
+        </span>
+    </p>
+
+    <p class=MsoNormal>
+        <img width=626 height=250 id="Picture 1"
+             src="~/images/DockerInfo_files/image001.jpg">
+    </p>
+
+    <p class=MsoNormal><span lang=EN-SG>&nbsp;</span></p>
+
+    <h1><span lang=EN-SG>Manual Installation</span></h1>
+
+    <p class=MsoNormal>
+        <span lang=EN-SG>
+            Proceed to the Docker website for steps to
+            install on your respective OS:<br>
+        </span><a href="https://docs.docker.com/engine/installation/"><span lang=EN-SG>https://docs.docker.com/engine/installation/</span></a>
+    </p>
+
+    <p class=MsoNormal><span lang=EN-SG>&nbsp;</span></p>
+
+    <p class=MsoTitle><span lang=EN-SG>Creating a Docker Swarm</span></p>
+
+    <h1><span lang=EN-SG>Create Manager and Worker nodes</span></h1>
+
+    <p class=MsoListParagraphCxSpFirst style='text-indent:-18.0pt'>
+        <span lang=EN-SG>
+            1)<span style='font:7.0pt "Times New Roman"'>
+                &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+            </span>
+        </span><span lang=EN-SG>
+            In Digital Ocean, spin up three droplets, and
+            name them manager, worker1 and worker2.
+        </span>
+    </p>
+
+    <p class=MsoListParagraphCxSpMiddle style='text-indent:-18.0pt'>
+        <span lang=EN-SG>
+            2)<span style='font:7.0pt "Times New Roman"'>
+                &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+            </span>
+        </span><span lang=EN-SG>Log in to all three boxes</span>
+    </p>
+
+    <p class=MsoListParagraphCxSpMiddle style='text-indent:-18.0pt'>
+        <span lang=EN-SG>
+            3)<span style='font:7.0pt "Times New Roman"'>
+                &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+            </span>
+        </span><span lang=EN-SG>Set up the manager server as the swarm manager:</span>
+    </p>
+
+    <p class=MsoListParagraphCxSpMiddle style='margin-left:54.0pt;text-indent:-18.0pt'>
+        <span lang=EN-SG style='color:#767171'>
+            -<span style='font:7.0pt "Times New Roman"'>
+                &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+            </span>
+        </span><i>
+            <span lang=EN-SG style='color:#767171'>
+                docker swarm init
+                --advertise-addr &lt;manager ip&gt;
+            </span>
+        </i>
+    </p>
+
+    <p class=MsoListParagraphCxSpMiddle style='margin-left:54.0pt;text-indent:-18.0pt'>
+        <span lang=EN-SG>
+            -<span style='font:7.0pt "Times New Roman"'>
+                &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+            </span>
+        </span><span lang=EN-SG>
+            Note down the docker swarm join command to run
+            in the workers.
+        </span>
+    </p>
+
+    <p class=MsoListParagraphCxSpMiddle style='text-indent:-18.0pt'>
+        <span lang=EN-SG>
+            4)<span style='font:7.0pt "Times New Roman"'>
+                &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+            </span>
+        </span><span lang=EN-SG>
+            Set up the worker servers to join the swarm by
+            running the docker swarm join command from the previous step:
+        </span>
+    </p>
+
+    <p class=MsoListParagraphCxSpMiddle style='margin-left:54.0pt;text-indent:-18.0pt'>
+        <span lang=EN-SG style='font-size:8.0pt;line-height:107%;color:#767171'>
+            -<span style='font:7.0pt "Times New Roman"'>
+                &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+            </span>
+        </span><span lang=EN-SG style='font-size:8.0pt;line-height:107%'>
+            e.g. <i>
+                <span style='color:#767171'>docker swarm join \</span>
+            </i>
+        </span>
+    </p>
+
+    <p class=MsoListParagraphCxSpMiddle style='margin-left:54.0pt'>
+        <i>
+            <span lang=EN-SG style='font-size:8.0pt;line-height:107%;color:#767171'>
+                --token
+                SWMTKN-1-1v5407jtlpxglufldmpugzpyu3rxpvvvtwtgv69jzq1vm4nhd5-3jg22tgs0wr0kx3dilwmn5nd9
+                \
+            </span>
+        </i>
+    </p>
+
+    <p class=MsoListParagraphCxSpMiddle style='text-indent:18.0pt'>
+        <i>
+            <span lang=EN-SG style='font-size:8.0pt;line-height:107%;color:#767171'>128.199.219.151:2377</span>
+        </i>
+    </p>
+
+    <p class=MsoListParagraphCxSpMiddle style='text-indent:-18.0pt'>
+        <span lang=EN-SG>
+            5)<span style='font:7.0pt "Times New Roman"'>
+                &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+            </span>
+        </span><span lang=EN-SG>
+            In the manager, run the following command to see
+            the workers and managers in the same swarm:
+        </span>
+    </p>
+
+    <p class=MsoListParagraphCxSpLast>
+        <i>
+            <span lang=EN-SG style='color:#767171'>
+                docker
+                node ls
+            </span>
+        </i>
+    </p>
+
+    <h1><span lang=EN-SG>Run a service on the swarm (e.g. adder image)</span></h1>
+
+    <p class=MsoNormal>
+        <i>
+            <span lang=EN-SG style='color:#767171'>
+                docker service
+                create --mode global --name &lt;service name&gt; --publish 5010:5010 &lt;docker
+                image&gt;
+            </span>
+        </i>
+    </p>
+
+    <p class=MsoNormal>
+        <i>
+            <span lang=EN-SG style='color:#767171'>
+                e.g<br>
+                docker service create --mode global --name adder --publish 5010:5010
+                adriancheong/adder
+            </span>
+        </i>
+    </p>
+
+    <h1><span lang=EN-SG>Monitor a service</span></h1>
+
+    <p class=MsoNormal>
+        <i>
+            <span lang=EN-SG style='color:#767171'>
+                docker service ps
+                &lt;service name&gt;
+            </span>
+        </i>
+    </p>
+
+    <h1><span lang=EN-SG>Benefits of Docker Swarm</span></h1>
+
+    <p class=MsoNormal>
+        <span lang=EN-SG>
+            Calls are automatically load balanced
+            between workers (The balancing logic is unknown to me). If a worker goes down,
+            calls are automatically routed to another active worker. (<b>
+                You can simulate a
+                node going down by just asking that worker to leave the swarm. But if it is a
+                manager node, you can’t leave the swarm, so do a container stop to start
+                ignoring requests
+            </b>)
+        </span>
+    </p>
+
+    <p class=MsoNormal>
+        <span lang=EN-SG>
+            When a container goes down on a node, the
+            rest of the workers take over while the manager attempts to <b>
+                restart a new
+                container on the affected node
+            </b>. You can try this by spinning up multiple
+            nodes and manually docker stop &lt;container&gt;. In a while you will see a new
+            container being spun up automatically!
+        </span>
+    </p>
+
+    <p class=MsoNormal>
+        <span lang=EN-SG>
+            If a whole worker goes down in replica
+            mode, it will spin up new containers on whatever active nodes it still has.
+        </span>
+    </p>
+
+    <p class=MsoNormal>
+        <span lang=EN-SG>
+            Global vs Replicas:<br>
+            Global will always just be number of available workers<br>
+            Replicas is a number of how many tasks you want to spawn up regardless of
+            workers you have. Tasks will be split among all available workers.
+        </span>
+    </p>
+
+    <p class=MsoNormal>
+        <span lang=EN-SG>
+            The power of rolling updates – Docker Swarm
+            handles the update/upgrade of images across all your nodes and staggers them
+            with a delay that can be set as a param. See here:<br>
+        </span><a href="https://docs.docker.com/engine/swarm/swarm-tutorial/rolling-update/">
+            <span lang=EN-SG>https://docs.docker.com/engine/swarm/swarm-tutorial/rolling-update/</span>
+        </a>
+    </p>
+
+    <p class=MsoNormal><span lang=EN-SG>&nbsp;</span></p>
+
+    <p class=MsoNormal><span lang=EN-SG>&nbsp;</span></p>
+
+    <p class=MsoNormal><span lang=EN-SG>&nbsp;</span></p>
+
+</div>
+
 
 <script>
 </script>
