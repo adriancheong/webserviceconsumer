@@ -19,11 +19,11 @@
 
 <script>
 
-    Add = function(){
+    Add = function () {
         var param1 = encodeURIComponent(document.getElementById('param1').value);
         var param2 = encodeURIComponent(document.getElementById('param2').value);
 
-        var url = "http://128.199.219.151:5010/api/add?param1=" + param1 + "&param2=" + param2;
+        var url = "http://" + document.domain + ":5010/api/add?param1=" + param1 + "&param2=" + param2;
 
 	    $.ajax({
 	      type: "GET",
@@ -45,7 +45,7 @@
         var param1 = encodeURIComponent(document.getElementById('param1').value);
         var param2 = encodeURIComponent(document.getElementById('param2').value);
 
-        var url = "http://128.199.219.151:5020/api/subtract?param1=" + param1 + "&param2=" + param2;
+        var url = "http://" + document.domain + ":5020/api/add?param1=" + param1 + "&param2=" + param2;
 
         $.ajax({
             type: "GET",
