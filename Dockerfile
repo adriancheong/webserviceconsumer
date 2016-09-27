@@ -3,6 +3,7 @@ ENV name WebserviceConsumer
 COPY src/$name /root/$name
 WORKDIR /root/$name
 RUN dotnet restore && dotnet build && dotnet publish
+WORKDIR /root/$name
 RUN cp -rf /bin/Debug/netcoreapp1.0/publish/* /root/
 EXPOSE 80/tcp
 WORKDIR /root
