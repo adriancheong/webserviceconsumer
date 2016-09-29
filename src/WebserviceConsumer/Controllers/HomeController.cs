@@ -58,7 +58,7 @@ namespace WebserviceConsumer.Controllers
 
     class Adder
     {
-        private const string URL = "http://localhost:5010/api/add";
+        private const string URL = "http://188.166.197.0:5010/api/add";
 
         public static string call(int param1, int param2)
         {
