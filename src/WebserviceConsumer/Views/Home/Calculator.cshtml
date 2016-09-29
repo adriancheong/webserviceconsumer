@@ -23,7 +23,7 @@
         var param1 = encodeURIComponent(document.getElementById('param1').value);
         var param2 = encodeURIComponent(document.getElementById('param2').value);
 
-        var url = "http://" + document.domain + ":5010/api/add?param1=" + param1 + "&param2=" + param2;
+        var url = "/Home/Add?param1=" + param1 + "&param2=" + param2;
 
 	    $.ajax({
 	      type: "GET",
