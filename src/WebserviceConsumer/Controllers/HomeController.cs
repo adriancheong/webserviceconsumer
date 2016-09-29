@@ -51,21 +51,26 @@ namespace WebserviceConsumer.Controllers
 
         public string Add(int param1, int param2)
         {
-            return Adder.call(param1, param2);
+            return Controllers.Calculator.Add(param1, param2);
         }
 
+        public string Subtract(int param1, int param2)
+        {
+            return Controllers.Calculator.Subtract(param1, param2);
+        }
     }
 
-    class Adder
+    class Calculator
     {
-        private const string URL = "http://188.166.197.0:5010/api/add";
+        private const string addUrl = "http://188.166.197.0:5010/api/add";
+        private const string subtractUrl = "http://188.166.197.0:5020/api/subtract";
 
-        public static string call(int param1, int param2)
+        public static string Add(int param1, int param2)
         {
             string urlParameters = "?param1=" + param1 + "&param2=" + param2;
 
             HttpClient client = new HttpClient();
-            client.BaseAddress = new Uri(URL);
+            client.BaseAddress = new Uri(addUrl);
 
             // Add an Accept header for JSON format.
             client.DefaultRequestHeaders.Accept.Add(
@@ -80,6 +85,35 @@ namespace WebserviceConsumer.Controllers
                 var result = response.Content.ReadAsStringAsync().Result;
                 //var dataObjects = response.Content.ReadAsAsync<IEnumerable<DataObject>>().Result;
                 Console.WriteLine("Managed to successfull call Add Webservice with this result: {0}", result);
+                return result;
+            }
+            else
+            {
+                Console.WriteLine("{0} ({1})", (int)response.StatusCode, response.ReasonPhrase);
+                return "Error";
+            }
+        }
+
+        public static string Subtract(int param1, int param2)
+        {
+            string urlParameters = "?param1=" + param1 + "&param2=" + param2;
+
+            HttpClient client = new HttpClient();
+            client.BaseAddress = new Uri(subtractUrl);
+
+            // Add an Accept header for JSON format.
+            client.DefaultRequestHeaders.Accept.Add(
+            new MediaTypeWithQualityHeaderValue("application/json"));
+
+            // List data response.
+            HttpResponseMessage response = client.GetAsync(urlParameters).Result;  // Blocking call!
+            if (response.IsSuccessStatusCode)
+            {
+                // Parse the response body. Blocking!
+                //var result = response.Content.ToString();
+                var result = response.Content.ReadAsStringAsync().Result;
+                //var dataObjects = response.Content.ReadAsAsync<IEnumerable<DataObject>>().Result;
+                Console.WriteLine("Managed to successfull call Subtract Webservice with this result: {0}", result);
                 return result;
             }
             else
