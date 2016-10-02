@@ -30,14 +30,13 @@
     "net451": {
       "frameworkAssemblies": {
         "System": {
-          "type": "build",
+          "type": "platform",
           "version": "4.0.0"
         },
         "System.Runtime": {
           "type": "build",
           "version": "4.0.10"
         },
-        "System": "4.0.0.0",
         "System.Core": "4.0.0.0",
         "Microsoft.CSharp": "4.0.0.0",
         "System.Net.Http": "4.0.0.0",
