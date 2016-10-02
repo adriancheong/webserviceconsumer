@@ -41,7 +41,10 @@
     },
     "net451": {
       "frameworkAssemblies": {
-        "System": "4.0.0.0",
+        "System": {
+          "type": "build",
+          "version": "4.0.0"
+        },
         "System.Runtime": {
           "type": "build",
           "version": "4.0.10"
