@@ -6,7 +6,6 @@ using Microsoft.AspNetCore.Mvc;
 using System.Net.Http;
 using System.Net.Http.Headers;
 using Microsoft.AspNetCore.Http;
-using RestSharp;
 
 namespace WebserviceConsumer.Controllers
 {
@@ -52,7 +51,6 @@ namespace WebserviceConsumer.Controllers
 
         public string Add(int param1, int param2)
         {
-            RestClient rc = new RestClient();
             return Controllers.Calculator.Add(param1, param2);
         }
 
