@@ -1,6 +1,9 @@
-FROM microsoft/iis
-RUN dism /online /enable-feature /all /featurename:iis-webserver /NoRestart
-RUN mkdir c:\install
-ADD WebDeploy_2_10_amd64_en-US.msi /install/WebDeploy_2_10_amd64_en-US.msi
-WORKDIR /install
-RUN powershell start-Process msiexec.exe -ArgumentList '/i c:\install\WebDeploy_2_10_amd64_en-US.msi /qn' -Wait
+FROM microsoft/dotnet:latest
+ENV name WebserviceConsumer
+COPY src/$name /root/$name
+WORKDIR /root/$name
+RUN dotnet restore && dotnet build && dotnet publish
+RUN cp -rf bin/Debug/netcoreapp1.0/publish/* /root/
+EXPOSE 80/tcp
+WORKDIR /root
+ENTRYPOINT dotnet ${name}.dll
