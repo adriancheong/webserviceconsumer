@@ -42,7 +42,8 @@
         "System.Net.Http": "4.0.*",
         "System.Security": "4.0.*",
         "System.Xml": "4.0.*"
-      }
+      },
+      "dependencies": { "System.Net.Http": "4.0.0" }
     }
   },
 
