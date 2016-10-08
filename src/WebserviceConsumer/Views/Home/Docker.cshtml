@@ -274,7 +274,178 @@
 
     <p class=MsoNormal><span lang=EN-SG>&nbsp;</span></p>
 
-    <p class=MsoNormal><span lang=EN-SG>&nbsp;</span></p>
+    <p class=MsoTitle><span lang=EN-SG>Docker Swarm on Azure Container Services</span></p>
+
+    <p class=MsoNormal>
+        <span lang=EN-SG>
+            Only 2 IPs should be exposed; the swarm
+            master IP, and the swarm agents IP. The swarm agents should only have a single IP
+            no matter how many agents there are, because they are behind a load balancer.
+            Therefore the swarm agents IP is in fact the load balancer’s IP.
+        </span>
+    </p>
+
+    <h1><span lang=EN-SG>Swarm Master</span></h1>
+
+    <p class=MsoListParagraphCxSpFirst style='margin-left:54.0pt;text-indent:-18.0pt'>
+        <span lang=EN-SG>
+            -<span style='font:7.0pt "Times New Roman"'>
+                &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+            </span>
+        </span><span lang=EN-SG>Responsible for running services on the agents</span>
+    </p>
+
+    <p class=MsoListParagraphCxSpLast style='margin-left:54.0pt;text-indent:-18.0pt'>
+        <span lang=EN-SG>
+            -<span style='font:7.0pt "Times New Roman"'>
+                &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+            </span>
+        </span><span lang=EN-SG>
+            You connect to this via CLI to do all the main
+            control panel work
+        </span>
+    </p>
+
+    <h1><span lang=EN-SG>Swarm Agents</span></h1>
+
+    <p class=MsoListParagraphCxSpFirst style='margin-left:54.0pt;text-indent:-18.0pt'>
+        <span lang=EN-SG>
+            -<span style='font:7.0pt "Times New Roman"'>
+                &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+            </span>
+        </span><span lang=EN-SG>Responsible for running the containers</span>
+    </p>
+
+    <p class=MsoListParagraphCxSpMiddle style='margin-left:54.0pt;text-indent:-18.0pt'>
+        <span lang=EN-SG>
+            -<span style='font:7.0pt "Times New Roman"'>
+                &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+            </span>
+        </span><span lang=EN-SG>Are load balanced</span>
+    </p>
+
+    <p class=MsoListParagraphCxSpMiddle style='margin-left:54.0pt;text-indent:-18.0pt'>
+        <span lang=EN-SG>
+            -<span style='font:7.0pt "Times New Roman"'>
+                &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+            </span>
+        </span><span lang=EN-SG>
+            Gets instructed by the Swarm Master
+            automatically to run containers
+        </span>
+    </p>
+
+    <p class=MsoListParagraphCxSpLast style='margin-left:54.0pt;text-indent:-18.0pt'>
+        <span lang=EN-SG>
+            -<span style='font:7.0pt "Times New Roman"'>
+                &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+            </span>
+        </span><span lang=EN-SG>
+            You never need to connect to these agents via
+            CLI
+        </span>
+    </p>
+
+    <h1><span lang=EN-SG>Sample Steps</span></h1>
+
+    <p class=MsoListParagraphCxSpFirst style='margin-left:54.0pt;text-indent:-18.0pt'>
+        <span lang=EN-SG>
+            -<span style='font:7.0pt "Times New Roman"'>
+                &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+            </span>
+        </span><span lang=EN-SG>Create an ACS on Azure.</span>
+    </p>
+
+    <p class=MsoListParagraphCxSpMiddle style='margin-left:54.0pt;text-indent:-18.0pt'>
+        <span lang=EN-SG>
+            -<span style='font:7.0pt "Times New Roman"'>
+                &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+            </span>
+        </span><span lang=EN-SG>
+            Connect to ACS Swarm Master using Putty. <b>
+                Note
+                that the port is 2200, not 22.
+            </b>
+        </span>
+    </p>
+
+    <p class=MsoListParagraphCxSpMiddle style='margin-left:54.0pt;text-indent:-18.0pt'>
+        <span lang=EN-SG>
+            -<span style='font:7.0pt "Times New Roman"'>
+                &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+            </span>
+        </span><span lang=EN-SG>
+            Once connected, if you do a docker ps now, you should
+            see 2 containers already running. These were automatically created by ACS. One of
+            the containers should be the docker swarm itself. We need to connect to this
+            swarm to run commands.
+        </span>
+    </p>
+
+    <p class=MsoListParagraphCxSpLast style='margin-left:54.0pt;text-indent:-18.0pt'>
+        <span lang=EN-SG>
+            -<span style='font:7.0pt "Times New Roman"'>
+                &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+            </span>
+        </span><span lang=EN-SG>
+            Set up the Docker CLI to point to the running swarm
+            cluster, instead of pointing to the Master itself, by running this command
+            (This basically tells the Docker commands to run all commands on the currently
+            running Docker Swarm container that is exposed on port 2375):
+        </span>
+    </p>
+
+    <p class=MsoQuote><span lang=EN-SG>export DOCKER_HOST=:2375</span></p>
+
+    <p class=MsoListParagraph style='margin-left:54.0pt;text-indent:-18.0pt'>
+        <span lang=EN-SG>
+            -<span style='font:7.0pt "Times New Roman"'>
+                &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+            </span>
+        </span><span lang=EN-SG>
+            Now do typical docker run commands to spin up
+            your webservices e.g.
+        </span>
+    </p>
+
+    <p class=MsoQuote><span lang=EN-SG>docker run -d -p 80:80 mywebserver</span></p>
+
+    <p class=MsoListParagraphCxSpFirst style='margin-left:54.0pt;text-indent:-18.0pt'>
+        <span lang=EN-SG>
+            -<span style='font:7.0pt "Times New Roman"'>
+                &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+            </span>
+        </span><span lang=EN-SG>
+            Do a docker ps now, and you should see the
+            webserver container running on one of the agents.
+        </span>
+    </p>
+
+    <p class=MsoListParagraphCxSpMiddle style='margin-left:54.0pt;text-indent:-18.0pt'>
+        <span lang=EN-SG>
+            -<span style='font:7.0pt "Times New Roman"'>
+                &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+            </span>
+        </span><span lang=EN-SG>
+            Depending on how many agents you configured at
+            the creation of the ACS, you can create more webservers to be load balanced
+            across all agents.
+        </span>
+    </p>
+
+    <p class=MsoListParagraphCxSpLast style='margin-left:54.0pt;text-indent:-18.0pt'>
+        <span lang=EN-SG>
+            -<span style='font:7.0pt "Times New Roman"'>
+                &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+            </span>
+        </span><span lang=EN-SG>
+            In order to test the webserver that is now
+            running, open a web browser and browse to the <b>
+                swarm agent load balancer IP
+                (Not the master’s IP)
+            </b>. You should see your website running.
+        </span>
+    </p>
 
 </div>
 
