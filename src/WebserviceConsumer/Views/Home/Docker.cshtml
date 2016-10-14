@@ -451,7 +451,15 @@
     <a href="https://azure.microsoft.com/en-us/documentation/articles/container-service-enable-public-access/">Details here</a>
 
     <h1><span lang=EN-SG>Scaling out ACS VMs</span></h1>
-    <a href="https://msftstack.wordpress.com/2016/05/13/change-the-instance-count-of-an-azure-vm-scale-set/">Details here</a>
+    <b><span lang=EN-SG>Using GUI</span></b><br />
+    <a href="https://msftstack.wordpress.com/2016/05/13/change-the-instance-count-of-an-azure-vm-scale-set/">Link Here</a>
+    <br /><br />
+    <b><span lang=EN-SG>Using Azure CLI</span></b>
+    <p class=MsoQuote><span lang=EN-SG>docker run -it microsoft/azure-cli</span><br />
+    <span lang=EN-SG>azure login</span><br />
+    <span lang=EN-SG>vmss scale {resource-group} {name} {new-capacity}</span><br />
+    <span lang=EN-SG>e.g. azure vmss scale AzureContainerService swarm-agent-6418D590-vmss 3</span></p>
+
 
     <br /><br /><br /><br />
     <p class=MsoTitle><span lang=EN-SG>Docker Swarm Load Test Results</span></p>
