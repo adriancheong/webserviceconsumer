@@ -404,10 +404,12 @@
             </span>
         </span><span lang=EN-SG>
             Now do typical docker run commands to spin up
-            your webservices e.g.
+            your webservices. Note that if you do a docker pull, it actually runs the pull
+            on all your nodes. Advisable to do a pull before a run.
         </span>
     </p>
 
+    <p class=MsoQuote><span lang=EN-SG>docker pull {containername}</span></p>
     <p class=MsoQuote><span lang=EN-SG>docker run -d -p 80:80 mywebserver</span></p>
 
     <p class=MsoListParagraphCxSpFirst style='margin-left:54.0pt;text-indent:-18.0pt'>
