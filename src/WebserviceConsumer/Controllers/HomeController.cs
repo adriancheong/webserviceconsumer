@@ -6,6 +6,7 @@ using Microsoft.AspNetCore.Mvc;
 using System.Net.Http;
 using System.Net.Http.Headers;
 using Microsoft.AspNetCore.Http;
+using WebserviceConsumer.Model;
 
 namespace WebserviceConsumer.Controllers
 {
@@ -40,6 +41,20 @@ namespace WebserviceConsumer.Controllers
         public IActionResult Docker()
         {
             //ViewData["Message"] = "Your Docker 5.0 page.";
+
+            return View();
+        }
+
+        public IActionResult Christmas()
+        {
+            //ViewData["Message"] = "Your Docker 5.0 page.";
+
+            return View();
+        }
+
+        public IActionResult Results()
+        {
+            ViewData["Results"] = TwoThirdAverageGame.GetTwoThirdOfAverage();
 
             return View();
         }

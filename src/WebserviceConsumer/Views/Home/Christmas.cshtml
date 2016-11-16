@@ -1,0 +1,47 @@
+﻿@{
+    ViewData["Title"] = "Christmas";
+}
+<h2>@ViewData["Title"]</h2>
+<h3>@ViewData["Message"]</h3>
+
+<p>Play Here:</p>
+
+<div class="container">
+    <form>
+        <div class="form-group">
+            <span>Group</span>
+            <input type="text" class="form-control" id="group" placeholder="1-10">
+            <span>Number</span>
+            <input type="text" class="form-control" id="number" placeholder="e.g 68">
+        </div>
+        <button type="button" class="btn btn-primary" id="btnAdd" onclick="Add()">Submit</button>
+    </form>
+</div>
+
+<script>
+    Add = function () {
+
+        var obj = {
+            "Group": document.getElementById('group').value,
+            "Number": document.getElementById('number').value
+        };
+        var url = "/TwoThirdAverage";
+
+	    $.ajax({
+	        type: "POST",
+	        contentType: "application/json",
+	        data: JSON.stringify(obj),
+            url: url,
+            success: function (ret) {
+	          //alert(ret);
+   	      },
+		    error: function(jqXHR, textStatus, errorThrown) {
+		      console.log(textStatus, errorThrown);
+		      alert(textStatus);
+		      alert(errorThrown);
+		    },
+		    complete: function() {
+		    }
+	    });
+    };
+</script>
