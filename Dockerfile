@@ -1,4 +1,4 @@
-FROM microsoft/dotnet:1.0.1-runtime
+FROM microsoft/dotnet:1.0.1-sdk
 ENV name WebserviceConsumer
 COPY src/$name /root/$name
 WORKDIR /root/$name
