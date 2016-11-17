@@ -7,7 +7,7 @@ namespace WebserviceConsumer.Model
 {
     public class Submission
     {
-        public int Group { get; set; }
-        public int Number { get; set; }
+        public string Name { get; set; }
+        public double Number { get; set; }
     }
 }

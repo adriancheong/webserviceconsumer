@@ -10,11 +10,22 @@ namespace Game1.Controllers
     [Route("[controller]")]
     public class TwoThirdAverageController : Controller
     {
-        // GET api/values
-        [HttpGet]
-        public string Get()
+        [HttpGet("Count")]
+        public int Count()
         {
-            return TwoThirdAverageGame.GetTwoThirdOfAverage().ToString();
+            return TwoThirdAverageGame.GetNumberOfSubmissions();
+        }
+
+        [HttpGet("Result")]
+        public double Result()
+        {
+            return Math.Round(TwoThirdAverageGame.GetTwoThirdOfAverage(), 8);
+        }
+
+        [HttpGet("Winner")]
+        public string Winner()
+        {
+            return TwoThirdAverageGame.GetWinner();
         }
 
         // GET api/values/5
@@ -29,7 +40,13 @@ namespace Game1.Controllers
         public void Post([FromBody]Submission value)
         {
             if (value != null)
-                TwoThirdAverageGame.Submit(value.Number);
+                TwoThirdAverageGame.Submit(value.Name, value.Number);
+        }
+
+        [HttpPost("Reset")]
+        public void Reset()
+        {
+            TwoThirdAverageGame.Reset();
         }
 
         // PUT api/values/5

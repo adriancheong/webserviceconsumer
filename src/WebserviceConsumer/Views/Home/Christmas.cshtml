@@ -6,23 +6,31 @@
 
 <p>Play Here:</p>
 
-<div class="container">
-    <form>
+
+    <form class="form-horizontal">
         <div class="form-group">
-            <span>Group</span>
-            <input type="text" class="form-control" id="group" placeholder="1-10">
-            <span>Number</span>
-            <input type="text" class="form-control" id="number" placeholder="e.g 68">
+            <label class="control-label col-sm-2" for="name">Name</label>
+            <div class="col-sm-10">
+                <input type="text" class="form-control" id="name" placeholder="e.g. Adrian">
+            </div>
         </div>
-        <button type="button" class="btn btn-primary" id="btnAdd" onclick="Add()">Submit</button>
+        <div class="form-group">
+            <label class="control-label col-sm-2" for="number">Number</label>
+            <div class="col-sm-10">
+                <input type="text" class="form-control" id="number" placeholder="between 1- 100 e.g. 68">
+            </div>
+        </div>
+        <div class="form-group">
+            <button type="button" class="btn btn-primary" id="btnAdd" onclick="Add()">Submit</button>
+        </div>
     </form>
-</div>
+
 
 <script>
     Add = function () {
 
         var obj = {
-            "Group": document.getElementById('group').value,
+            "Name": document.getElementById('name').value,
             "Number": document.getElementById('number').value
         };
         var url = "/TwoThirdAverage";

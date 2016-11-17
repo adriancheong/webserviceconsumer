@@ -54,8 +54,8 @@ namespace WebserviceConsumer.Controllers
 
         public IActionResult Results()
         {
-            ViewData["Results"] = TwoThirdAverageGame.GetTwoThirdOfAverage();
-
+            ViewData["Results"] = Math.Round(TwoThirdAverageGame.GetTwoThirdOfAverage(), 2);
+            ViewData["Winner"] = TwoThirdAverageGame.GetWinner();
             return View();
         }
 

@@ -1,10 +1,20 @@
 ﻿@{
-    ViewData["Title"] = "Results";
+    ViewData["Title"] = "2/3 of Average is";
 }
 <h2>@ViewData["Title"]</h2>
 <h2>@ViewData["Results"]</h2>
 <h3>@ViewData["Message"]</h3>
 
+<div class="progress">
+    <div class="progress-bar progress-bar-success" role="progressbar" aria-valuenow="@ViewData["Results"]"
+         aria-valuemin="0" aria-valuemax="100" style="width:@ViewData["Results"]%">
+        @ViewData["Results"]
+    </div>
+</div>
+
+<div>
+    <h2>Winner is @ViewData["Winner"]</h2>
+</div>
 
 <script>
 </script>
