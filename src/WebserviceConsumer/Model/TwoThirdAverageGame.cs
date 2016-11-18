@@ -8,10 +8,23 @@ namespace WebserviceConsumer.Model
     public class TwoThirdAverageGame
     {
         private static Dictionary<string, double> playersAndTheirNumbers = new Dictionary<string, double>();
+        private static readonly double MIN_VALUE = 0.0;
+        private static readonly double MAX_VALUE = 100.0;
 
         public static void Submit(string name, double submission)
         {
-            playersAndTheirNumbers[name] = submission;
+            if (name != null && isWithinValidRange(submission))
+            {
+                string trimmedName = System.Text.RegularExpressions.Regex.Replace(name.Trim(), @"\s+", " ");
+
+                if (!string.IsNullOrEmpty(trimmedName))
+                    playersAndTheirNumbers[trimmedName] = submission;
+            }
+        }
+
+        private static bool isWithinValidRange(double submission)
+        {
+            return (submission >= MIN_VALUE && submission <= MAX_VALUE);
         }
 
         public static double GetTwoThirdOfAverage()
@@ -45,9 +58,19 @@ namespace WebserviceConsumer.Model
             return playersAndTheirNumbers.Count();
         }
 
+        public static double GetValueThisPersonSubmitted(string v)
+        {
+            return playersAndTheirNumbers[v];
+        }
+
         public static void Reset()
         {
             playersAndTheirNumbers = new Dictionary<string, double>();
+        }
+
+        public static List<string> GetPlayerList()
+        {
+            return playersAndTheirNumbers.Keys.ToList();
         }
     }
 }
